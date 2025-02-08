@@ -53,13 +53,14 @@ const wsServer = new WebSocket.Server({ server });
       const { type, payload } = JSON.parse(data);
   
       switch(type) {
-        case 'CLIENT.MESSAGE.NEW_USER':
-        handleNewUser(socket);
+        case CLIENT.MESSAGE.NEW_USER:
+          handleNewUser(socket);
+          break;
         case CLIENT.MESSAGE.NEW_MESSAGE:
           broadcast(data, socket);
-          break;
+            break;
         default:
-          break;
+            break;
       }
     });
   })
@@ -76,7 +77,7 @@ function handleNewUser(socket) {
   if (nextPlayerIndex < 4) {
     // TODO: Send PLAYER_ASSIGNMENT to the socket with a clientPlayerIndex
     const message = {
-      type: 'SERVER.MESSAGE.PLAYER_ASSIGNMENT',
+      type: SERVER.MESSAGE.PLAYER_ASSIGNMENT,
       payload: { clientPlayerIndex: nextPlayerIndex },
     }
     socket.send(JSON.stringify(message));
@@ -99,7 +100,7 @@ function handleNewUser(socket) {
   else {
     // TODO: Send GAME_FULL to the socket
     const message = {
-      type: 'SERVER.MESSAGE.GAME_FULL'
+      type: SERVER.MESSAGE.GAME_FULL
     }
     socket.send(JSON.stringify(message));
   }

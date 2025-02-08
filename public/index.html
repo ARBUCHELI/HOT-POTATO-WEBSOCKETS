@@ -84,18 +84,17 @@
           // 'NEW_POTATO_HOLDER' => updateCurrentPotatoHolder(newPotatoHolderIndex)
           // 'GAME_OVER' => endGame()
       wsClient.onmessage = (messageEvent) => {
-        const message = messageEvent.data;
-        //showMessageReceived(message);
-        const { type, payload } = JSON.parse(message);
+        const { type, payload } = JSON.parse(messageEvent.data);
+
         switch(type) {
           case SERVER.MESSAGE.GAME_FULL:
             updateDisplay('The game is full :(')
             break;
           case SERVER.MESSAGE.PLAYER_ASSIGNMENT:
-            setPlayerIndes(payload.clientPlayerIndex);
+            setPlayerIndex(payload.clientPlayerIndex);
             break;
           default:
-            break;
+            console.log('Unknown message type:', type);
         }
       }
       
