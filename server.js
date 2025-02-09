@@ -59,6 +59,8 @@ const wsServer = new WebSocket.Server({ server });
         case CLIENT.MESSAGE.NEW_MESSAGE:
           broadcast(data, socket);
             break;
+        case CLIENT.MESSAGE.PASS_POTATO:
+          passThePotatoTo(payload.newPotatoHolderIndex);
         default:
             break;
       }
