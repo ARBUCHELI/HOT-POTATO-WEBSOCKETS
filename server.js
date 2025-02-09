@@ -135,7 +135,11 @@ function startTimer() {
   const interval = setInterval(() => {
     if (clockValue > 0) {
       // TODO: broadcast 'COUNTDOWN' with the clockValue
-      
+      const data = {
+        type: SERVER.BROADCAST.COUNTDOWN,
+        payload: { clockValue }
+      }
+      broadcast(data);
 
       // decrement until the clockValue reaches 0
       clockValue--;
