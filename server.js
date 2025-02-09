@@ -118,7 +118,11 @@ function handleNewUser(socket) {
 
 function passThePotatoTo(newPotatoHolderIndex) {
   // TODO: Broadcast a NEW_POTATO_HOLDER message with the newPotatoHolderIndex
-  
+  const data = {
+    type: SERVER.BROADCAST.NEW_POTATO_HOLDER,
+    payload: {newPotatoHolderIndex}
+  }
+  broadcast(data);
 }
 
 function startTimer() {
