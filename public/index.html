@@ -93,6 +93,8 @@
           case SERVER.MESSAGE.PLAYER_ASSIGNMENT:
             setPlayerIndex(payload.clientPlayerIndex);
             break;
+          case SERVER.BROADCAST.NEW_POTATO_HOLDER:
+            updateCurrentPotatoHolder(payload.newPotatoHolderIndex);
           default:
             console.log('Unknown message type:', type);
         }
