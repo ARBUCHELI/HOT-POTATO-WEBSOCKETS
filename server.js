@@ -70,6 +70,15 @@ const wsServer = new WebSocket.Server({ server });
 ///////////////////////////////////////////////
 
 // TODO: Implement the broadcast pattern
+function broadcast(data, socketToOmit) {
+  // TODO
+  // Exercise 8: Implement the broadcast pattern. Exclude the emitting socket!
+  wsServer.clients.forEach(connectedClient => {
+    if (connectedClient.readyState === WebSocket.OPEN && connectedClient !== socketToOmit) {
+      connectedClient.send(JSON.stringify(data));
+    }
+  })
+}
 
 
 function handleNewUser(socket) {
