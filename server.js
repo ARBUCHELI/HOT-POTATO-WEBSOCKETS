@@ -128,33 +128,26 @@ function passThePotatoTo(newPotatoHolderIndex) {
 }
 
 function startTimer() {
-  // Set the clock to start at MAX_TIME (30)
   let clockValue = MAX_TIME;
-  
-  // Start the clock ticking
   const interval = setInterval(() => {
     if (clockValue > 0) {
-      // TODO: broadcast 'COUNTDOWN' with the clockValue
-      const data = {
+      const countdownMessage = {
         type: SERVER.BROADCAST.COUNTDOWN,
         payload: { clockValue }
-      }
-      broadcast(data);
-
-      // decrement until the clockValue reaches 0
-      clockValue--;
-    }
-
-    // At 0...
-    else {
-      clearInterval(interval); // stop the timer
-      nextPlayerIndex = 0; // reset the players index
-      
-      // TODO: Broadcast 'GAME_OVER'
-   
+      };
+      broadcast(countdownMessage);
+      clockValue--; // Decrement after broadcasting
+    } else {
+      clearInterval(interval);
+      nextPlayerIndex = 0;
+      const gameOverMessage = {
+        type: SERVER.BROADCAST.GAME_OVER
+      };
+      broadcast(gameOverMessage);
     }
   }, 1000);
 }
+
 
 // Start the server listening on localhost:8080
 server.listen(PORT, () => {

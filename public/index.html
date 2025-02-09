@@ -95,8 +95,12 @@
             break;
           case SERVER.BROADCAST.NEW_POTATO_HOLDER:
             updateCurrentPotatoHolder(payload.newPotatoHolderIndex);
+            break;
           case SERVER.BROADCAST.COUNTDOWN:
             countDown(payload.clockValue)
+            break;
+          case SERVER.BROADCAST.GAME_OVER:
+            endGame();
           default:
             console.log('Unknown message type:', type);
         }
